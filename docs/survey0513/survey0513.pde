@@ -10,17 +10,18 @@ public int WIDTH = 900;
 public int HEIGH = 600;
 public int N = 25;
 public int ansN = 30;
-public int stage = 0;
+public int stage = 4;
 public long startTime = 0;
 public int halfWidth = 0;
 public int ageNum = -1;
 public int[] ansChecked1 = new int[ansN];
 public int startPos;
 public int checked = -1;
-public String textFile;
+public String textFile = "results.txt";
 public PImage[] img1, changedImg1;
 public PImage[] img2, changedImg2;
-public int[] data = new int[42];
+public int[] data = new int[43];
+public int score;
 
 void setup () {
   size(900, 600);
@@ -29,9 +30,8 @@ void setup () {
   for (int i = 0; i < ansN; i ++) {
     ansChecked1[i] = -1;
   }
-  String rand = str(random(1));
+  //String rand = str(random(1));
   //textFile = createWriter(rand + ".txt");
-  textFile = rand + ".txt";
   img1 = new PImage[N];
   changedImg1 = new PImage[N];
   for (int i = 1; i <= N; i ++) {
@@ -60,6 +60,10 @@ void setup () {
     for (int j = num; j < max; j ++){
       img2[j] = img2[j + 1];
     }
+  }
+  
+  for (int i = 0; i < 43; i++) {
+    data[i] = -1;
   }
 }
 
@@ -239,7 +243,98 @@ int answer1 () {
     for (int i = 0; i < N; i ++) {
       data[i + 2] = ansChecked1[i];
     }
-    saveStrings(textFile, data);
+    if (ansChecked1[0] == 0) {
+      score++; 
+    }
+    if (ansChecked1[1] == 0) {
+      score++; 
+    }
+    if (ansChecked1[2] == 1) {
+      score++; 
+    }
+    if (ansChecked1[3] == 1) {
+      score++; 
+    }
+    if (ansChecked1[4] == 1) {
+      score++; 
+    }
+    if (ansChecked1[5] == 0) {
+      score++; 
+    }
+    if (ansChecked1[6] == 0) {
+      score++; 
+    }
+    if (ansChecked1[7] == 1) {
+      score++; 
+    }
+    if (ansChecked1[8] == 0) {
+      score++; 
+    }
+    if (ansChecked1[9] == 1) {
+      score++; 
+    }
+    if (ansChecked1[10] == 0) {
+      score++; 
+    }
+    if (ansChecked1[11] == 1) {
+      score++; 
+    }
+    if (ansChecked1[12] == 0) {
+      score++; 
+    }
+    if (ansChecked1[13] == 0) {
+      score++; 
+    }
+    if (ansChecked1[14] == 0) {
+      score++; 
+    }
+    if (ansChecked1[15] == 1) {
+      score++; 
+    }
+    if (ansChecked1[16] == 0) {
+      score++; 
+    }
+    if (ansChecked1[17] == 0) {
+      score++; 
+    }
+    if (ansChecked1[18] == 1) {
+      score++; 
+    }
+    if (ansChecked1[19] == 1) {
+      score++; 
+    }
+    if (ansChecked1[20] == 0) {
+      score++; 
+    }
+    if (ansChecked1[21] == 1) {
+      score++; 
+    }
+    if (ansChecked1[22] == 0) {
+      score++; 
+    }
+    if (ansChecked1[23] == 1) {
+      score++; 
+    }
+    if (ansChecked1[24] == 1) {
+      score++; 
+    }
+    if (ansChecked1[25] == 0) {
+      score++; 
+    }
+    if (ansChecked1[26] == 1) {
+      score++; 
+    }
+    if (ansChecked1[27] == 1) {
+      score++; 
+    }
+    if (ansChecked1[28] == 1) {
+      score++; 
+    }
+    if (ansChecked1[29] == 0) {
+      score++; 
+    }
+    data[42] = score;
+    // saveStrings(textFile, data);
     //for (int i = 0; i < 42; i++) {
     //  print(data[i] + ",");
     //}
@@ -250,13 +345,26 @@ int answer1 () {
 
 
 int finish() {
+  PImage finish1;
+  finish1 = loadImage("finish1.png");
   //Button dl;
   //dl = new Button("FINISH", halfWidth - 30, 300, 65, 20, 0);
   background(255);
   fill(0);
+  textSize(30);
+  text("You're score is ", 100, 150);
+  textSize(50);
+  text(score, 400, 150);
+  textSize(30);
+  text("/30", 460, 150);
   textSize(40);
-  text("Thank you for helping our survey!", 100, 150);
+  text("Thank you for helping our survey!", 100, 300);
   textSize(15);
+  image(finish1, 100, 400, 600, 70);
+  for (int i = 0; i < 43; i++) {
+    text(data[i] + ",", 100 + i * 15, 500);
+  }
+  
   //text("Please download a file to push the DOWNLOAD ", 100, 200);
   //text("and send the file to masaaaaegu[at]yahoo.co.jp(convert [at] to @). ", 100, 220);
   //dl.display();
