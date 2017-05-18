@@ -1,4 +1,4 @@
-/* @pjs preload="title1_1.png, ans1.png, ans2.png
+/* @pjs preload="title1_1.png, ans1.png, ans2.png, ans0115.png, ans1630.png
 ,1_1.png, 1_2.png, 1_3.png, 1_4.png, 1_5.png, 1_6.png, 1_7.png, 1_8.png, 1_9.png, 1_10.png
 ,1_11.png, 1_12.png, 1_13.png, 1_14.png, 1_15.png, 1_16.png, 1_17.png, 1_18.png, 1_19.png, 1_20.png
 ,1_21.png, 1_22.png, 1_23.png, 1_24.png, 1_25.png
@@ -196,7 +196,7 @@ int answer1 () {
   image(ansImg2, 50, 70, 120, HEIGH - 100);
   image(ansImg3, 200, 70, 120, HEIGH - 100);
 
-  textSize(20);
+  textSize(15);
   for (int i = 0; i < ansN; i ++) {
     if (i < 15) {
       text((i + 1) + ". ", 400, 106 + i * 30);
