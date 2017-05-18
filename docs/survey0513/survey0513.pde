@@ -10,7 +10,7 @@ public int WIDTH = 900;
 public int HEIGH = 600;
 public int N = 25;
 public int ansN = 30;
-public int stage = 4;
+public int stage = 0;
 public long startTime = 0;
 public int halfWidth = 0;
 public int ageNum = -1;
@@ -88,7 +88,7 @@ void draw () {
 
 int title () {
   PImage title1;
-  title1 = loadImage("title1.png");
+  title1 = loadImage("title1_1.png");
   
   RadioButton[] age;
   Button startButton;
@@ -116,7 +116,7 @@ int title () {
   }
   
   fill(0);
-  image(title1, startPos, 340, halfWidth -100, HEIGH / 2 - 150);
+  image(title1, startPos, 340, halfWidth -100, HEIGH / 2 - 200);
 
   startButton.display();
   startButton.isPushed();
@@ -141,7 +141,7 @@ int sheet1 () {
   fill(0);
   textSize(30);
   text("SHEET1", startPos, 50);
-  int LastTime = int(20 - (millis() - startTime) / 1000) ;
+  int LastTime = int(30 - (millis() - startTime) / 1000) ;
   textSize(30);
   text(LastTime, 720, 70);
   textSize(15);
@@ -163,7 +163,7 @@ int sheet2 () {
   fill(0);
   textSize(30);
   text("SHEET2", startPos, 50);
-  int LastTime = int(20 - (millis() - startTime) / 1000) ;
+  int LastTime = int(30 - (millis() - startTime) / 1000) ;
   textSize(30);
   text(LastTime, 720, 70);
   textSize(15);
@@ -183,41 +183,44 @@ int sheet2 () {
 int answer1 () {
   RadioButton[][] ansNum1;
   Button finish1;
-  PImage ansImg1, ansImg2;
+  PImage ansImg1, ansImg2, ansImg3;
   int finishCheck;
   finish1 = new Button("REPLY", halfWidth - 30, 550, 65, 20, 0);
   ansNum1 = new RadioButton[ansN][2];
   ansImg1 = loadImage("ans1.png");
-  ansImg2 = loadImage("ans2.png");
+  ansImg2 = loadImage("ans0115.png");
+  ansImg3 = loadImage("ans1630.png");
   background(255);
   
-  image(ansImg1, startPos, 10, 350, 70);
-  image(ansImg2, 80, 20, 120, HEIGH - 50);
+  image(ansImg1, startPos, 10, 350, 50);
+  image(ansImg2, 50, 70, 120, HEIGH - 100);
+  image(ansImg3, 200, 70, 120, HEIGH - 100);
 
+  textSize(20);
   for (int i = 0; i < ansN; i ++) {
     if (i < 15) {
-      text((i + 1) + ". ", 300, 120 + i * 30);
+      text((i + 1) + ". ", 400, 106 + i * 30);
       if (ansChecked1[i] == 0) {
-        ansNum1[i][0] = new RadioButton("Yes", 350, 110 + i * 30, 1);
+        ansNum1[i][0] = new RadioButton("Yes", 450, 100 + i * 30, 1);
       } else {
-        ansNum1[i][0] = new RadioButton("Yes", 350, 110 + i * 30, 0);
+        ansNum1[i][0] = new RadioButton("Yes", 450, 100 + i * 30, 0);
       }
       if (ansChecked1[i] == 1) {
-        ansNum1[i][1] = new RadioButton("No", 450, 110 + i * 30, 1);
+        ansNum1[i][1] = new RadioButton("No", 550, 100 + i * 30, 1);
       } else {
-        ansNum1[i][1] = new RadioButton("No", 450, 110 + i * 30, 0);
+        ansNum1[i][1] = new RadioButton("No", 550, 100 + i * 30, 0);
       }
     } else {
-      text((i + 1) + ". ", 600, 120 + (i - 15) * 30);
+      text((i + 1) + ". ", 650, 106 + (i - 15) * 30);
     if (ansChecked1[i] == 0) {
-      ansNum1[i][0] = new RadioButton("Yes", 650, 110 + (i - 15) * 30, 1);
+      ansNum1[i][0] = new RadioButton("Yes", 700, 100 + (i - 15) * 30, 1);
     } else {
-      ansNum1[i][0] = new RadioButton("Yes", 650, 110 + (i - 15) * 30, 0);
+      ansNum1[i][0] = new RadioButton("Yes", 700, 100 + (i - 15) * 30, 0);
     }
     if (ansChecked1[i] == 1) {
-      ansNum1[i][1] = new RadioButton("No", 750, 110 + (i - 15) * 30, 1);
+      ansNum1[i][1] = new RadioButton("No", 800, 100 + (i - 15) * 30, 1);
     } else {
-      ansNum1[i][1] = new RadioButton("No", 750, 110 + (i - 15) * 30, 0);
+      ansNum1[i][1] = new RadioButton("No", 800, 100 + (i - 15) * 30, 0);
     }
     }
    
@@ -362,7 +365,7 @@ int finish() {
   textSize(15);
   image(finish1, 100, 400, 600, 70);
   for (int i = 0; i < 43; i++) {
-    text(data[i] + ",", 100 + i * 15, 500);
+    text(data[i] + ", ", 100 + i * 15, 500);
   }
   
   //text("Please download a file to push the DOWNLOAD ", 100, 200);
