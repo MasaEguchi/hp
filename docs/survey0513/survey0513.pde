@@ -1,15 +1,15 @@
-/* @pjs preload="title1_1.png, ans1.png, ans2.png, ans0115.png, ans1630.png
+/* @pjs preload="title1_1.png, ans1.png, ans2.png, ans0110.png, ans1120.png
 ,1_1.png, 1_2.png, 1_3.png, 1_4.png, 1_5.png, 1_6.png, 1_7.png, 1_8.png, 1_9.png, 1_10.png
 ,1_11.png, 1_12.png, 1_13.png, 1_14.png, 1_15.png, 1_16.png, 1_17.png, 1_18.png, 1_19.png, 1_20.png
 ,1_21.png, 1_22.png, 1_23.png, 1_24.png, 1_25.png
 ,2_1.png, 2_2.png, 2_3.png, 2_4.png, 2_5.png, 2_6.png, 2_7.png, 2_8.png, 2_9.png, 2_10.png
 ,2_11.png, 2_12.png, 2_13.png, 2_14.png, 2_15.png, 2_16.png, 2_17.png, 2_18.png, 2_19.png, 2_20.png
-,2_21.png, 2_22.png, 2_23.png, 2_24.png, 2_25.png"; */ 
+,2_21.png, 2_22.png, 2_23.png, 2_24.png, 2_25.png, finish1.png"; */ 
 
 public int WIDTH = 900;
 public int HEIGH = 600;
 public int N = 25;
-public int ansN = 30;
+public int ansN = 20;
 public int stage = 0;
 public long startTime = 0;
 public int halfWidth = 0;
@@ -17,10 +17,10 @@ public int ageNum = -1;
 public int[] ansChecked1 = new int[ansN];
 public int startPos;
 public int checked = -1;
-public String textFile = "results.txt";
+public String textFile;
 public PImage[] img1, changedImg1;
 public PImage[] img2, changedImg2;
-public int[] data = new int[43];
+public int[] data = new int[ansN + 3];
 public int score;
 
 void setup () {
@@ -62,7 +62,7 @@ void setup () {
     }
   }
   
-  for (int i = 0; i < 43; i++) {
+  for (int i = 0; i < ansN + 3; i++) {
     data[i] = -1;
   }
 }
@@ -188,39 +188,39 @@ int answer1 () {
   finish1 = new Button("REPLY", halfWidth - 30, 550, 65, 20, 0);
   ansNum1 = new RadioButton[ansN][2];
   ansImg1 = loadImage("ans1.png");
-  ansImg2 = loadImage("ans0115.png");
-  ansImg3 = loadImage("ans1630.png");
+  ansImg2 = loadImage("ans0110.png");
+  ansImg3 = loadImage("ans1120.png");
   background(255);
   
   image(ansImg1, startPos, 10, 350, 50);
-  image(ansImg2, 50, 70, 120, HEIGH - 100);
-  image(ansImg3, 200, 70, 120, HEIGH - 100);
+  image(ansImg2, 50, 70, 150, HEIGH - 100);
+  image(ansImg3, 200, 70, 150, HEIGH - 100);
 
   textSize(15);
   for (int i = 0; i < ansN; i ++) {
-    if (i < 15) {
-      text((i + 1) + ". ", 400, 106 + i * 30);
-      if (ansChecked1[i] == 0) {
-        ansNum1[i][0] = new RadioButton("Yes", 450, 100 + i * 30, 1);
-      } else {
-        ansNum1[i][0] = new RadioButton("Yes", 450, 100 + i * 30, 0);
-      }
+    if (i < 10) {
+      text((i + 1) + ". ", 400, 106 + i * 40);
       if (ansChecked1[i] == 1) {
-        ansNum1[i][1] = new RadioButton("No", 550, 100 + i * 30, 1);
+        ansNum1[i][0] = new RadioButton("Yes", 450, 100 + i * 40, 1);
       } else {
-        ansNum1[i][1] = new RadioButton("No", 550, 100 + i * 30, 0);
+        ansNum1[i][0] = new RadioButton("Yes", 450, 100 + i * 40, 0);
+      }
+      if (ansChecked1[i] == 0) {
+        ansNum1[i][1] = new RadioButton("No", 550, 100 + i * 40, 1);
+      } else {
+        ansNum1[i][1] = new RadioButton("No", 550, 100 + i * 40, 0);
       }
     } else {
-      text((i + 1) + ". ", 650, 106 + (i - 15) * 30);
-    if (ansChecked1[i] == 0) {
-      ansNum1[i][0] = new RadioButton("Yes", 700, 100 + (i - 15) * 30, 1);
-    } else {
-      ansNum1[i][0] = new RadioButton("Yes", 700, 100 + (i - 15) * 30, 0);
-    }
+      text((i + 1) + ". ", 650, 106 + (i - 10) * 40);
     if (ansChecked1[i] == 1) {
-      ansNum1[i][1] = new RadioButton("No", 800, 100 + (i - 15) * 30, 1);
+      ansNum1[i][0] = new RadioButton("Yes", 700, 100 + (i - 10) * 40, 1);
     } else {
-      ansNum1[i][1] = new RadioButton("No", 800, 100 + (i - 15) * 30, 0);
+      ansNum1[i][0] = new RadioButton("Yes", 700, 100 + (i - 10) * 40, 0);
+    }
+    if (ansChecked1[i] == 0) {
+      ansNum1[i][1] = new RadioButton("No", 800, 100 + (i - 10) * 40, 1);
+    } else {
+      ansNum1[i][1] = new RadioButton("No", 800, 100 + (i - 10) * 40, 0);
     }
     }
    
@@ -228,12 +228,12 @@ int answer1 () {
     ansNum1[i][1].display();
     ansNum1[i][0].isPushed();
     if (ansNum1[i][0].checked == 1) {
-      ansChecked1[i] = 0;
+      ansChecked1[i] = 1;
       ansNum1[i][1].checked = 0;
     }
     ansNum1[i][1].isPushed();
     if (ansNum1[i][1].checked == 1) {
-      ansChecked1[i] = 1;
+      ansChecked1[i] = 0;
       ansNum1[i][0].checked = 0;
     }   
   }
@@ -243,19 +243,19 @@ int answer1 () {
   if (finish1.clicked == 1) {
     data[0] = ageNum;
     data[1] = checked;
-    for (int i = 0; i < N; i ++) {
+    for (int i = 0; i < ansN; i ++) {
       data[i + 2] = ansChecked1[i];
     }
     if (ansChecked1[0] == 0) {
       score++; 
     }
-    if (ansChecked1[1] == 0) {
+    if (ansChecked1[1] == 1) {
       score++; 
     }
-    if (ansChecked1[2] == 1) {
-      score++; 
+    if (ansChecked1[2] == 0) {
+      score++;
     }
-    if (ansChecked1[3] == 1) {
+    if (ansChecked1[3] == 0) {
       score++; 
     }
     if (ansChecked1[4] == 1) {
@@ -264,34 +264,34 @@ int answer1 () {
     if (ansChecked1[5] == 0) {
       score++; 
     }
-    if (ansChecked1[6] == 0) {
+    if (ansChecked1[6] == 1) {
       score++; 
     }
-    if (ansChecked1[7] == 1) {
+    if (ansChecked1[7] == 0) {
       score++; 
     }
     if (ansChecked1[8] == 0) {
       score++; 
     }
-    if (ansChecked1[9] == 1) {
+    if (ansChecked1[9] == 0) {
       score++; 
     }
-    if (ansChecked1[10] == 0) {
+    if (ansChecked1[10] == 1) {
       score++; 
     }
     if (ansChecked1[11] == 1) {
       score++; 
     }
-    if (ansChecked1[12] == 0) {
+    if (ansChecked1[12] == 1) {
       score++; 
     }
-    if (ansChecked1[13] == 0) {
+    if (ansChecked1[13] == 1) {
       score++; 
     }
-    if (ansChecked1[14] == 0) {
+    if (ansChecked1[14] == 1) {
       score++; 
     }
-    if (ansChecked1[15] == 1) {
+    if (ansChecked1[15] == 0) {
       score++; 
     }
     if (ansChecked1[16] == 0) {
@@ -306,38 +306,12 @@ int answer1 () {
     if (ansChecked1[19] == 1) {
       score++; 
     }
-    if (ansChecked1[20] == 0) {
-      score++; 
+    data[ansN + 2] = score;
+    String[] data_str = new String[ansN + 4];
+    for (int i = 0; i < ansN + 3; i++) {
+      data_str[i] = str(data[i]); 
     }
-    if (ansChecked1[21] == 1) {
-      score++; 
-    }
-    if (ansChecked1[22] == 0) {
-      score++; 
-    }
-    if (ansChecked1[23] == 1) {
-      score++; 
-    }
-    if (ansChecked1[24] == 1) {
-      score++; 
-    }
-    if (ansChecked1[25] == 0) {
-      score++; 
-    }
-    if (ansChecked1[26] == 1) {
-      score++; 
-    }
-    if (ansChecked1[27] == 1) {
-      score++; 
-    }
-    if (ansChecked1[28] == 1) {
-      score++; 
-    }
-    if (ansChecked1[29] == 0) {
-      score++; 
-    }
-    data[42] = score;
-    // saveStrings(textFile, data);
+    saveStrings("results.txt", data_str);
     //for (int i = 0; i < 42; i++) {
     //  print(data[i] + ",");
     //}
@@ -364,8 +338,11 @@ int finish() {
   text("Thank you for helping our survey!", 100, 300);
   textSize(15);
   image(finish1, 100, 400, 600, 70);
-  for (int i = 0; i < 43; i++) {
-    text(data[i] + ", ", 100 + i * 15, 500);
+  for (int i = 0; i < 11; i++) {
+    text(data[i] + ",", 200 + i * 25, 500);
+  }
+  for (int i = 11; i < ansN + 3; i ++) {
+    text(data[i] + ",", 200 + (i - 11) * 25, 520);
   }
   
   //text("Please download a file to push the DOWNLOAD ", 100, 200);
