@@ -333,7 +333,7 @@ int finish() {
   textSize(50);
   text(score, 400, 150);
   textSize(30);
-  text("/30", 460, 150);
+  text("/20", 460, 150);
   textSize(40);
   text("Thank you for helping our survey!", 100, 300);
   textSize(15);
